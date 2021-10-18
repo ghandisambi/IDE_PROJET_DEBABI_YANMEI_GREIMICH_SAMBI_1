@@ -63,29 +63,16 @@ public class Fichier extends File {
     public Page getPageFirst(int pageId){
             if(pages.isEmpty()){
                 System.out.println("Fichier vide");
-                addPages();
-                return pages.firstElement();
-
-            }else{
-                return pages.firstElement();
-            }
-            
+            }  
+            return pages.firstElement();
     }
     /** 
      * Permet de prendre la dernière page du fichier
      * @param pageId 
      * @return Page la dernière page
      */
-    public Page getPageLast(int pageId){
-        if(pages.isEmpty()){
-            System.out.println("Fichier vide");
-            addPages();
-            return pages.lastElement();
-
-        }else{
-            return pages.lastElement();
-        }  
-        
+    public Page getPageLast(int pageId){  
+        return pages.lastElement();
     }
 
     
@@ -100,16 +87,7 @@ public class Fichier extends File {
      * @return int l'index de la dernière page du fichier
      */
     public int getIdPage(){
-        if(pages.isEmpty()){
-            System.out.println("Fichier vide");
-            addPages();
-            System.out.println("nouvelle page");
-            return pages.lastElement().getId();
-
-        }else{
-            return pages.lastElement().getId();
-        }
-        
+        return pages.lastElement().getId();
     }
     
     /** 

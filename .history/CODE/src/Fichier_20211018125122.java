@@ -100,16 +100,7 @@ public class Fichier extends File {
      * @return int l'index de la dernière page du fichier
      */
     public int getIdPage(){
-        if(pages.isEmpty()){
-            System.out.println("Fichier vide");
-            addPages();
-            System.out.println("nouvelle page");
-            return pages.lastElement().getId();
-
-        }else{
-            return pages.lastElement().getId();
-        }
-        
+        return pages.lastElement().getId();
     }
     
     /** 
