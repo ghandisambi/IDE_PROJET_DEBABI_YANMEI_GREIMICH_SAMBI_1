@@ -113,7 +113,6 @@ public class Fichier extends File {
     }
     
     /** 
-     * 
      * @return int l'index du fichier
      */
     public int getFileIdx() {

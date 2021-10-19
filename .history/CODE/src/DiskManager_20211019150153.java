@@ -167,6 +167,16 @@ public class DiskManager {
         file.close();
 
     }
+    public void WritePage(PageId pageId) throws IOException{
+        FileOutputStream ecriture =null;
+        Page page = recherchFichier(pageId).getPageFirst(pageId.getPageIdx());
+            // lecture du fichier
+            ecriture = new FileOutputStream(recherchFichier(pageId));
+            byte [] buf = page.getOctets() ;
+            int n;
+            
+
+    }
     
     /** 
      * @return String

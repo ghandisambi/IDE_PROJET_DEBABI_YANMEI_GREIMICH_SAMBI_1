@@ -1,7 +1,6 @@
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -116,9 +115,6 @@ public class DiskManager {
         file.read(buff.array());
         file.close();
         
-    }
-
-    public void ReadPage(PageId pageId){
         FileInputStream lecture = null;
         try {
             // Recherche du fichier 
@@ -126,9 +122,7 @@ public class DiskManager {
             // lecture du fichier
             lecture = new FileInputStream(recherchFichier(pageId));
             byte [] buf = page.getOctets() ;
-            int n;
-            
-            
+            int n=0;
             
             while ((n = lecture.read(buf)) >= 0){
                 for (byte bit : buf) {
@@ -139,7 +133,6 @@ public class DiskManager {
                 buf = page.getOctets();
 
             } 
-            
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -152,19 +145,18 @@ public class DiskManager {
                 e.printStackTrace();
             }
         }
+        
+
+       
+
+        
     }
     
     /** 
      * @param pageId
      * @param buff
      */
-    public void WritePage(PageId pageId,ByteBuffer buff) throws IOException{
-        Fichier fichier = recherchFichier(pageId);
-        RandomAccessFile file = new RandomAccessFile(fichier, "rw");
-        long i = (pageId.getPageIdx()*DBParams.pageSize);
-        file.seek(i);
-        file.write(buff.array());
-        file.close();
+    public void WritePage(PageId pageId,ByteBuffer buff){
 
     }
     
@@ -173,6 +165,7 @@ public class DiskManager {
      */
     @Override
     public String toString() {
+        
         return super.toString();
     }
     
@@ -189,34 +182,6 @@ public class DiskManager {
      */
     public Vector<Fichier> getListFichiers() {
         return listFichiers;
-    }
-
-    public static void main(String[] args) {
-        DiskManager ds = new DiskManager();
-        PageId p= new PageId(0, 0);
-        p=ds.AllocPage();
-        System.out.println("le fichier d'index:"+p.getFileIdx()+" contient la page d'index:"+p.getPageIdx());
-        p=ds.AllocPage();
-        System.out.println("le fichier d'index:"+p.getFileIdx()+" contient la page d'index:"+p.getPageIdx());
-        p=ds.AllocPage();
-        System.out.println("le fichier d'index:"+p.getFileIdx()+" contient la page d'index:"+p.getPageIdx());
-        p=ds.AllocPage();
-        System.out.println("le fichier d'index:"+p.getFileIdx()+" contient la page d'index:"+p.getPageIdx());
-        p=ds.AllocPage();
-        System.out.println("le fichier d'index:"+p.getFileIdx()+" contient la page d'index:"+p.getPageIdx());
-        p=ds.AllocPage();
-        System.out.println("le fichier d'index:"+p.getFileIdx()+" contient la page d'index:"+p.getPageIdx());
-        
-        ByteBuffer  buffer = ByteBuffer.allocate(4);
-        p.setFileIdx(0);
-        p.setPageIdx(1);
-        System.out.println("--------------------********* Lecture du fichier:"+ds.getListFichiers().get(0)+" *********-----------------------");
-        ds.ReadPage(p);
-        System.out.println("\n_________________________________________________ Fin lecture _________________________________________________");
-        System.out.println("\nTaille du fichier en nombre de caractère:"+ds.getListFichiers().get(0).length()+"\n");
-
-        p=ds.AllocPage();
-        System.out.println("le fichier d'index:"+p.getFileIdx()+" contient la page d'index:"+p.getPageIdx());
     }
 
 
